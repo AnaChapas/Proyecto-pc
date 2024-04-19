@@ -11,6 +11,13 @@ costodiesel = 6.00
 Pregular=29.00
 Psuper=30.00
 Pdiesel=26.50
+#Cantidad de galones
+totalconsum1= 0
+totalconsum2=0
+totalconsum3= 0
+totalconsum4=0
+totalconsum5= 0
+totalconsum6=0
 #Capacidad maxima de galones:
 capacidad_maxima = 80
 #Variables de gestion de turnos
@@ -47,29 +54,29 @@ while continuar:
 
             if agregar_combustible.lower() == 's':
                 cantregular = float(input("Ingrese la cantidad de galones de gasolina regular: "))
-                fdepositoR=depositoR++cantregular
-                if fdepositoR <= capacidad_maxima:
+                depositoR=depositoR++cantregular
+                if depositoR <= capacidad_maxima:
                     fcostoR = (cantregular * costoregular)
                 else:
-                    fdepositoR=depositoR
+                    depositoR
                     print("Operación inválida. La cantidad excede la capacidad del depósito de gasolina regular.")
                     fcostoR = 0
                 
                 cantsuper = float(input("Ingrese la cantidad de galones de gasolina súper: "))
-                fdepositoS=depositoS++cantsuper
-                if fdepositoS <= capacidad_maxima:
+                depositoS=depositoS++cantsuper
+                if depositoS <= capacidad_maxima:
                     fcostoS = (cantsuper * costosuper)
                 else:
-                    fdepositoS=depositoS
+                    depositoS=depositoS
                     print("Operación inválida. La cantidad excede la capacidad del depósito de gasolina súper.")
                     fcostoS = 0
             
                 cantdiesel = float(input("Ingrese la cantidad de galones de diésel: "))
-                fdepositoD=depositoD++cantdiesel
-                if fdepositoD <= capacidad_maxima:
+                depositoD=depositoD++cantdiesel
+                if depositoD <= capacidad_maxima:
                     fcostoD = (cantdiesel * costodiesel)                  
                 else:
-                    fdepositoD=depositoD
+                    depositoD=depositoD
                     print("Operación inválida. La cantidad excede la capacidad del depósito de diésel.")
                     fcostoD = 0
                          
@@ -88,9 +95,9 @@ while continuar:
     elif eleccion == 2:
             print("")
             print("--------------CARTELERA Y GALONES DISPONIBLES EN CADA DEPOSITO--------------")
-            print("El precio de Regular es: Q.",Pregular, " el deposito de Regular tiene:",fdepositoR," galones") 
-            print("El precio de Super es: Q.",Psuper, " el deposito de Super tiene:",fdepositoS," galones" )
-            print("El precio de Diesel es: Q.",Pdiesel," el deposito de Diesel tiene:",fdepositoD," galones" )
+            print("El precio de Regular es: Q.",Pregular, " el deposito de Regular tiene:",depositoR," galones") 
+            print("El precio de Super es: Q.",Psuper, " el deposito de Super tiene:",depositoS," galones" )
+            print("El precio de Diesel es: Q.",Pdiesel," el deposito de Diesel tiene:",depositoD," galones" )
             print("----------------------------------------------------------------------------")
             print("")
             print("Si desea agregarle a su carro regular, coloque 1: ")
@@ -100,7 +107,7 @@ while continuar:
             
             #Si se escoge la opcion 1 se realizara lo siguiente:     
             if tipocombustible==1:
-                if fdepositoR <=5:
+                if depositoR <=5:
                     print("")
                     print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                     print("¿Desea regresar a menú?")
@@ -120,9 +127,9 @@ while continuar:
                 
                     if eleccion3==1:
                         eleccion4=int(input("¿cuantos galones desea agregar? "))      
-                        fdepositoR=fdepositoR-eleccion4               
-                        if fdepositoR<0:
-                            fdepositoR=fdepositoR++eleccion4
+                        depositoR=depositoR-eleccion4               
+                        if depositoR<0:
+                            depositoR=depositoR++eleccion4
                             print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                             print("¿Desea regresar a menú?")
                             print("Si desea regresar a menú, coloque 1")
@@ -133,7 +140,7 @@ while continuar:
                             else: 
                                 continuar=False
                         else:
-                            if fdepositoR>=0:
+                            if depositoR>=0:
                                 nombrecliente1=input("Ingrese su nombre completo:")
                                 nit1=input("Ingrese su número de NIT: ")
                                 nobomba1=input("Ingrese el número de a utilizar (un número entre 1 y 4):")
@@ -141,8 +148,10 @@ while continuar:
                                 print("-------------------RESUMEN DE SU COMPRA-------------------")
                                 print("Nombre del cliente: ",nombrecliente1)
                                 print("NIT: ",nit1)
-                                totalconsum1=eleccion4*Pregular
-                                print("Total a pagar: Q.",totalconsum1)
+                                ##Variable de almacenamiento de ventas totales del dia
+                                ValorVenta1=eleccion4*Pregular
+                                totalconsum1= totalconsum1 + eleccion4*Pregular
+                                print("Total a pagar: Q.",ValorVenta1)
                                 print("----------------------------------------------------------------------------")
                                 print("")
                                 print("Si desea continuar con su compra, coloque 1")
@@ -157,7 +166,7 @@ while continuar:
                                     else:
                                         print("Número de tarjeta inválido. Intente nuevamente.")
                                 else:
-                                    fdepositoR=fdepositoR++eleccion4
+                                    depositoR=depositoR++eleccion4
                                     print("")
                                     print("¿Desea regresar a menú?")
                                     print("Si desea regresar a menú, coloque 1")
@@ -171,9 +180,9 @@ while continuar:
                         print("")
                         eleccion10=int(input("¿cuantos desea agregar? "))      
                         galones1=eleccion10/Pregular  
-                        fdepositoR=fdepositoR-galones1        
-                        if fdepositoR<0:
-                            fdepositoR=fdepositoR++galones1
+                        depositoR=depositoR-galones1        
+                        if depositoR<0:
+                            depositoR=depositoR++galones1
                             print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                             print("¿Desea regresar a menú?")
                             print("Si desea regresar a menú, coloque 1")
@@ -184,7 +193,7 @@ while continuar:
                             else: 
                                 continuar=False
                         else:
-                             if fdepositoR>=0:
+                             if depositoR>=0:
                                 nombrecliente2=input("Ingrese su nombre completo:")
                                 nit2=input("Ingrese su número de NIT: ")
                                 nobomba2=input("Ingrese el número de a utilizar (un número entre 1 y 4):")
@@ -192,7 +201,9 @@ while continuar:
                                 print("-------------------RESUMEN DE SU COMPRA-------------------")
                                 print("Nombre del cliente: ",nombrecliente2)
                                 print("NIT: ",nit2)
-                                print("Total a pagar: Q.",eleccion10)
+                                ValorVenta2=eleccion10
+                                totalconsum2=totalconsum2+eleccion10
+                                print("Total a pagar: Q.",ValorVenta2)
                                 print("----------------------------------------------------------------------------")
                                 print("")
                                 print("Si desea continuar con su compra, coloque 1")
@@ -207,7 +218,7 @@ while continuar:
                                     else:
                                         print("Número de tarjeta inválido. Intente nuevamente.")
                                 else:
-                                    fdepositoR=fdepositoR++galones1
+                                    depositoR=depositoR++galones1
                                     print("")
                                     print("¿Desea regresar a menú?")
                                     print("Si desea regresar a menú, coloque 1")
@@ -219,7 +230,7 @@ while continuar:
                                         continuar = False
             #Si se escoge la opcion 2 se realizara lo siguiente:                                 
             elif tipocombustible==2:
-                    if fdepositoS <=5:
+                    if depositoS <=5:
                         print("")
                         print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                         print("¿Desea regresar a menú?")
@@ -239,9 +250,9 @@ while continuar:
                         if eleccion16==1:
                             print("")
                             eleccion17=int(input("¿cuantos galones desea agregar?: "))      
-                            fdepositoS=fdepositoS-eleccion17
-                            if fdepositoS<0:
-                                fdepositoS=fdepositoS++eleccion17
+                            depositoS=depositoS-eleccion17
+                            if depositoS<0:
+                                depositoS=depositoS++eleccion17
                                 print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                                 print("¿Desea regresar a menú?")
                                 print("Si desea regresar a menú, coloque 1")
@@ -253,7 +264,7 @@ while continuar:
                                 else: 
                                     continuar=False
                             else:
-                                if fdepositoS>=0:
+                                if depositoS>=0:
                                     print("")
                                     nombrecliente3=input("Ingrese su nombre completo: ")
                                     nit3=input("Ingrese su número de NIT: ")
@@ -262,8 +273,9 @@ while continuar:
                                     print("-------------------RESUMEN DE SU COMPRA-------------------")
                                     print("Nombre del cliente: ",nombrecliente3)
                                     print("NIT: ",nit3)
-                                    totalconsum3=eleccion17*Pregular
-                                    print("Total a pagar: Q.",totalconsum3)
+                                    ValorVenta3=eleccion17*Pregular
+                                    totalconsum3=totalconsum3+ eleccion17*Pregular
+                                    print("Total a pagar: Q.",ValorVenta3)
                                     print("----------------------------------------------------------------------------")
                                     print("")
                                     print("Si desea continuar con su compra, coloque 1")
@@ -278,7 +290,7 @@ while continuar:
                                         else:
                                             print("Número de tarjeta inválido. Intente nuevamente.")
                                     else:
-                                        fdepositoS=fdepositoS++eleccion17
+                                        depositoS=depositoS++eleccion17
                                         print("")
                                         print("¿Desea regresar a menú?")
                                         print("Si desea regresar a menú, coloque 1")
@@ -292,9 +304,9 @@ while continuar:
                             print("")
                             eleccion23=int(input("¿cuanto desea agregar? "))      
                             galones3=eleccion23/Psuper 
-                            fdepositoS= fdepositoS-galones3         
-                            if fdepositoS<0:
-                                fdepositoS=fdepositoS++galones3
+                            depositoS= depositoS-galones3         
+                            if depositoS<0:
+                                depositoS=depositoS++galones3
                                 print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                                 print("¿Desea regresar a menú?")
                                 print("Si desea regresar a menú, coloque 1")
@@ -305,7 +317,7 @@ while continuar:
                                 else: 
                                     continuar=False
                             else:
-                                if fdepositoS>=0:
+                                if depositoS>=0:
                                     print("")
                                     nombrecliente4=input("Ingrese su nombre completo:")
                                     nit4=input("Ingrese su número de NIT: ")
@@ -314,7 +326,9 @@ while continuar:
                                     print("-------------------RESUMEN DE SU COMPRA-------------------")
                                     print("Nombre del cliente: ",nombrecliente4)
                                     print("NIT: ",nit4)
-                                    print("Total a pagar: Q.",eleccion23)
+                                    ValorVenta4=eleccion23
+                                    totalconsum4= totalconsum4+eleccion23
+                                    print("Total a pagar: Q.",ValorVenta4)
                                     print("----------------------------------------------------------------------------")
                                     print("")
                                     print("Si desea continuar con su compra, coloque 1")
@@ -329,7 +343,7 @@ while continuar:
                                         else:
                                             print("Número de tarjeta inválido. Intente nuevamente.")
                                     else:
-                                        fdepositoS=fdepositoS++galones3
+                                        depositoS=depositoS++galones3
                                         print("")
                                         print("¿Desea regresar a menú?")
                                         print("Si desea regresar a menú, coloque 1")
@@ -341,7 +355,7 @@ while continuar:
                                             continuar = False                                
             #Si se escoge la opcion 3 se realizara lo siguiente:     
             else:
-                if fdepositoD <=5:
+                if depositoD <=5:
                     print("")
                     print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                     print("¿Desea regresar a menú?")
@@ -362,9 +376,9 @@ while continuar:
                     if eleccion28==1:
                         print("")
                         eleccion29=int(input("¿cuantos galones desea agregar? "))      
-                        fdepositoD=fdepositoD-eleccion29               
-                        if fdepositoD<0:
-                            fdepositoD=fdepositoD++eleccion29
+                        depositoD=depositoD-eleccion29               
+                        if depositoD<0:
+                            depositoD=depositoD++eleccion29
                             print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                             print("")
                             print("¿Desea regresar a menú?")
@@ -376,7 +390,7 @@ while continuar:
                             else: 
                                 continuar=False
                         else:
-                            if fdepositoD>=0:
+                            if depositoD>=0:
                                 print("")
                                 nombrecliente5=input("Ingrese su nombre completo:")
                                 nit5=input("Ingrese su número de NIT: ")
@@ -385,8 +399,9 @@ while continuar:
                                 print("-------------------RESUMEN DE SU COMPRA-------------------")
                                 print("Nombre del cliente: ",nombrecliente5)
                                 print("NIT: ",nit5)
-                                totalconsum5=eleccion29*Pregular
-                                print("Total a pagar: Q.",totalconsum5)
+                                ValorVenta5=eleccion29*Pregular
+                                totalconsum5=totalconsum5=eleccion29*Pregular
+                                print("Total a pagar: Q.",ValorVenta5)
                                 print("----------------------------------------------------------------------------")
                                 print("")
                                 print("Si desea continuar con su compra, coloque 1")
@@ -401,7 +416,7 @@ while continuar:
                                     else:
                                         print("Número de tarjeta inválido. Intente nuevamente.")
                                 else:
-                                    fdepositoD=fdepositoD++eleccion29
+                                    depositoD=depositoD++eleccion29
                                     print("")
                                     print("¿Desea regresar a menú?")
                                     print("Si desea regresar a menú, coloque 1")
@@ -415,9 +430,9 @@ while continuar:
                         print("")
                         eleccion34=int(input("¿cuanto desea agregar? "))      
                         galones5=eleccion34/Pdiesel   
-                        fdepositoD=fdepositoD-galones5     
-                        if fdepositoD<0:
-                            fdepositoD=fdepositoD++galones5
+                        depositoD=depositoD-galones5     
+                        if depositoD<0:
+                            depositoD=depositoD++galones5
                             print("No puede continuar con la compra debido a que el deposito tiene bajo nivel de galones ")
                             print("¿Desea regresar a menú?")
                             print("Si desea regresar a menú, coloque 1")
@@ -428,7 +443,7 @@ while continuar:
                             else: 
                                 continuar=False
                         else:
-                            if fdepositoD>=0:
+                            if depositoD>=0:
                                 print("")
                                 nombrecliente6=input("Ingrese su nombre completo:")
                                 nit6=input("Ingrese su número de NIT: ")
@@ -437,7 +452,9 @@ while continuar:
                                 print("-------------------RESUMEN DE SU COMPRA-------------------")
                                 print("Nombre del cliente: ",nombrecliente6)
                                 print("NIT: ",nit6)
-                                print("Total a pagar: Q.",eleccion34)
+                                ValorVenta6=eleccion34
+                                totalconsum6=totalconsum6+eleccion34
+                                print("Total a pagar: Q.",ValorVenta6)
                                 print("----------------------------------------------------------------------------")
                                 print("")
                                 print("Si desea continuar con su compra, coloque 1")
@@ -452,7 +469,7 @@ while continuar:
                                     else:
                                         print("Número de tarjeta inválido. Intente nuevamente.")
                                 else:
-                                    fdepositoD=fdepositoD++galones5
+                                    depositoD=depositoD++galones5
                                     print("")
                                     print("¿Desea regresar a menú?")
                                     print("Si desea regresar a menú, coloque 1")
@@ -484,6 +501,7 @@ while continuar:
             travespe=travespe++per2
             per3=int(input("¿Cuantas personas desea agregar a la jornada nocturna?:"))
             tranoc=per3++tranoc
+                                                                                                                
             print("")
             print("----------------------------Costos de los trabajadores-----------------------------")
             print("-----------Horarios------------Tipo de jornada------------Salario por jornada------")
@@ -493,7 +511,6 @@ while continuar:
             print("-----------------------------------------------------------------------------------")
             print("¿Desea regresar a menú?")
             print("Si desea regresar a menú, coloque 1")
-            print("Si desea salir definitivamente del programa, coloque 2")
             print("Si desea salir definitivamente del programa, coloque 2")
             eleccion60=int(input("Coloque la opcion elegida: "))
             if eleccion60==1:
@@ -545,4 +562,19 @@ while continuar:
                 continuar=False
 #Codigo de reporte de rentabilidad
     else:
-        print("")
+        ingtotal= totalconsum1 + totalconsum3 + totalconsum5
+        materiaprima= depositoR * costoregular + depositoS * costosuper + depositoD * costodiesel
+        manobra= tradiurna * saldi + travespe * salves + tranoc * salnoc
+        costfij= 10.00
+        print("Reporte de rentabilidad")
+        print("Ingresos totales:                         Q.  ",ingtotal)
+        print("Materia Prima:")
+        print("        Costo combustible Regular:        Q.  ", depositoR * costoregular)
+        print("        Costo de combustible Súper:       Q.  ", depositoS * costosuper)
+        print("        Costo Diesel:                     Q.  ", depositoD * costodiesel)
+        print("Mano de obra:")
+        print("        Salario Jornada Diurna:           Q.  ",tradiurna * saldi) 
+        print("        Salario Jornada Vespertina:       Q.  ",travespe * salves)
+        print("        Salario Jornada Nocturna:         Q.  ",tranoc * salnoc)
+        print("Costos Fijos:                             Q.  ",costfij)
+        print("Utilidad Bruta:                           Q.  ", ingtotal - materiaprima - manobra - costfij)
